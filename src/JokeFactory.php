@@ -1,23 +1,27 @@
 <?php
 namespace DanyelKeddah\ChuckNorrisJokes;
 
+use GuzzleHttp\Client;
+use function GuzzleHttp\json_decode;
+
 class JokeFactory
 {
-    protected $jokes = [
-        'Chuck Norris\' tears cure cancer. Too bad he has never cried.',
-        'Chuck Norris counted to infinity... Twice.',
-        'If you can see Chuck Norris, he can see you. If you can\'t see Chuck Norris you may be only seconds away from death.'
-    ];
+    const API_ENDPOINT = 'http://api.icndb.com/jokes/random';
+    
+    protected $client;
 
-    public function __construct(array $jokes = null)
+    public function __construct(Client $client = null)
     {
-        if ($jokes) {
-            $this->jokes = $jokes;
-        }
+        $this->client = $client ?: new Client();
     }
 
+    /// not handling errors here
     public function getRandomJoke()
     {
-        return $this->jokes[array_rand($this->jokes)];
+        $response = $this->client->get(self::API_ENDPOINT);
+
+        $joke = json_decode($response->getBody()->getContents());
+
+        return $joke->value->joke;
     }
 }

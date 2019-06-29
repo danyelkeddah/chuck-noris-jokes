@@ -13,7 +13,7 @@ composer require danyelkeddah/chuck-norris-jokes
 ## Usage
 
 ```php
-use danyelkeddah\ChuckNorrisJokes\JokeFactory;
+use DanyelKeddah\ChuckNorrisJokes\JokeFactory;
 
 $jokes = new JokeFactory();
 $joke = $jokes->getRandomJoke();
