@@ -14,7 +14,7 @@ class LaravelTest extends TestCase
             ChuckNorrisJokesServiceProvider::class
         ];
     }
-
+    
     protected function getPackageAliases($app)
     {
         return [
@@ -26,11 +26,27 @@ class LaravelTest extends TestCase
     public function the_console_command_returns_a_joke()
     {
         $this->withoutMockingConsoleOutput();
-        ChuckNorris::shouldReceive('getRandomJoke')->once()->andReturn('some joke');
+        ChuckNorris::shouldReceive('getRandomJoke')
+            ->once()
+            ->andReturn('some joke');
+            
         $this->artisan('chuck-norris');
-
+        
         $output = Artisan::output();
-
+        
         $this->assertSame('some joke'.PHP_EOL, $output);
+    }
+    
+    /** @test */
+    public function the_route_can_be_accessed()
+    {
+        ChuckNorris::shouldReceive('getRandomJoke')
+            ->once()
+            ->andReturn('some joke');
+        
+        $this->get('/chuck-norris')
+            ->assertViewIs('chuck-norris::joke')
+            ->assertViewHas('joke', 'some joke')
+            ->assertStatus(200);
     }
 }
