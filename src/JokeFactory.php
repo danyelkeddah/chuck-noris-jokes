@@ -1,5 +1,5 @@
 <?php
-namespace danyelkeddah\ChuckNorrisJokes;
+namespace DanyelKeddah\ChuckNorrisJokes;
 
 class JokeFactory
 {

@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "danyelkeddah\\ChuckNorrisJokes\\": "src/"
+            "DanyelKeddah\\ChuckNorrisJokes\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "danyelkeddah\\ChuckNorrisJokes\\Tests\\": "tests"
+            "DanyelKeddah\\ChuckNorrisJokes\\Tests\\": "tests"
         }
     }
 }
